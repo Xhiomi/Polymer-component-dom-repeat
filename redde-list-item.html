@@ -7,10 +7,16 @@
         display: block;
       }
     </style>
-    <template is="dom-repeat" items="{{items}}">
-      <slot name="items">
-      </slot>
+
+    <template is="dom-repeat" items="[[list]]" as="product">
+      <redde-product-item slot="items"
+        icon="[[product.icon]]"
+        item-title="[[product.name]]"
+        item-description="[[product.description]]"
+        item-amount="[[product.amount]]"
+        on-item-was-selected="getSelectedItem"></redde-product-item>
     </template>
+
   </template>
 
   <script>
@@ -26,8 +32,12 @@
       static get is() { return 'redde-list-item'; }
       static get properties() {
         return {
-          items: Array
+          list: Array
         };
+      }
+
+      getSelectedItem(e) {
+        console.log('selecteditem', e);
       }
     }
 
